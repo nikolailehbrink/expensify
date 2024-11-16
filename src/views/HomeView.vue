@@ -115,32 +115,40 @@ function addExpense() {
       </InputGroup>
       <Button>Add expense</Button>
     </form>
-    <div class="flex gap-2" :key="expense.id" v-for="expense in filteredExpenses">
+    <div
+      class="flex flex-col gap-1 relative border-2 px-4 py-3 rounded-lg"
+      :key="expense.id"
+      v-for="expense in filteredExpenses"
+    >
+      <div class="flex justify-between">
+        <h2 class="font-bold">
+          {{ expense.title }}
+        </h2>
+        <p class="text-sm text-neutral-500">{{ formatCentsToEuro(expense.amount) }}</p>
+      </div>
+      <button
+        @click="toggleCategoryFilter(expense.category)"
+        class="inline-flex self-start px-1.5 py-0.5 bg-neutral-200 rounded text-xs"
+        :class="{
+          'bg-green-500': expense.category === filteredCategory,
+        }"
+      >
+        {{ expense.category }}
+      </button>
+      <p class="text-xs text-neutral-700">{{ formatDate(expense.date) }}</p>
       <button
         @click="removeExpense(expense.id)"
-        class="bg-red-500 size-6"
+        class="bg-neutral-300 size-6 absolute rounded-full -top-3 -right-3"
         aria-label="Remove expense"
       >
         x
       </button>
-      <div class="flex gap-2">
-        <h2 class="font-bold">
-          {{ expense.title }}
-        </h2>
-        <p>{{ formatCentsToEuro(expense.amount) }}</p>
-        <button
-          @click="toggleCategoryFilter(expense.category)"
-          class="inline-flex px-1.5 py-0.5 bg-neutral-200 rounded text-xs"
-          :class="{
-            'bg-green-500': expense.category === filteredCategory,
-          }"
-        >
-          {{ expense.category }}
-        </button>
-        <p>{{ expense.id }}</p>
-        <p class="text-xs text-neutral-700">{{ formatDate(expense.date) }}</p>
-      </div>
     </div>
-    <p>{{ formatCentsToEuro(totalAmount) }}</p>
+    <p>
+      Total amount:
+      <span class="font-bold">
+        {{ formatCentsToEuro(totalAmount) }}
+      </span>
+    </p>
   </main>
 </template>
