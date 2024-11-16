@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
-import Input from '@/components/Input.vue'
 import InputGroup from '@/components/InputGroup.vue'
+import Input from '@/components/Input.vue'
 import Label from '@/components/Label.vue'
 import { formatCentsToEuro, formatDate } from '@/lib/utils'
 import { computed, ref } from 'vue'
@@ -70,7 +70,9 @@ const filteredExpenses = computed(() =>
     ? expenses.value.filter((expense) => expense.category === filteredCategory.value)
     : expenses.value,
 )
-const totalAmount = filteredExpenses.value.reduce((expense, total) => expense + total.amount, 0)
+const totalAmount = computed(() =>
+  filteredExpenses.value.reduce((expense, total) => expense + total.amount, 0),
+)
 function toggleCategoryFilter(category: string) {
   filteredCategory.value = filteredCategory.value ? null : category
 }
@@ -79,7 +81,7 @@ function removeExpense(id: number) {
 }
 function addExpense() {
   return expenses.value.push({
-    id: expenses.value.length + 1,
+    id: expenses.value[expenses.value.length - 1].id + 1,
     title: form.value.title,
     amount: form.value.amount,
     category: form.value.category,
@@ -89,17 +91,17 @@ function addExpense() {
 </script>
 
 <template>
-  <main class="container mx-auto flex flex-col max-w-lg gap-4 flex-wrap">
-    <form @submit.prevent="addExpense" class="space-y-2">
+  <main class="container mx-auto flex gap-4 items-center">
+    <form @submit.prevent="addExpense" class="space-y-2 w-1/2">
       <InputGroup>
         <Label :for="form.title">Title</Label>
         <Input type="text" v-model="form.title" placeholder="Supermarkt" />
       </InputGroup>
       <InputGroup>
         <Label :for="form.amount"
-          >Amount <span class="text-xs text-neutral-500">(in cents)</span></Label
+          >Amount <span class="text-xs text-neutral-600 font-normal">(in cents)</span></Label
         >
-        <Input type="number" v-model="form.amount" value="43" />
+        <Input type="number" v-model="form.amount" />
       </InputGroup>
       <InputGroup>
         <Label :for="form.category">Category</Label>
@@ -116,40 +118,43 @@ function addExpense() {
       </InputGroup>
       <Button>Add expense</Button>
     </form>
-    <div
-      class="flex flex-col gap-1 relative border-2 px-4 py-3 rounded-lg"
-      :key="expense.id"
-      v-for="expense in filteredExpenses"
-    >
-      <div class="flex justify-between">
-        <h2 class="font-bold">
-          {{ expense.title }}
-        </h2>
-        <p class="text-sm text-neutral-500">{{ formatCentsToEuro(expense.amount) }}</p>
-      </div>
-      <button
-        @click="toggleCategoryFilter(expense.category)"
-        class="inline-flex self-start px-1.5 py-0.5 bg-neutral-200 rounded text-xs"
-        :class="{
-          'bg-green-500': expense.category === filteredCategory,
-        }"
+
+    <div class="flex flex-col gap-2 grow">
+      <p>
+        Total amount:
+        <span class="font-bold">
+          {{ formatCentsToEuro(totalAmount) }}
+        </span>
+      </p>
+      <div
+        :key="expense.id"
+        v-for="expense in filteredExpenses"
+        class="flex flex-col gap-1 relative border-2 border-neutral-200 px-3 py-2 rounded-lg"
       >
-        {{ expense.category }}
-      </button>
-      <p class="text-xs text-neutral-700">{{ formatDate(expense.date) }}</p>
-      <button
-        @click="removeExpense(expense.id)"
-        class="bg-neutral-300 size-6 absolute rounded-full -top-3 -right-3"
-        aria-label="Remove expense"
-      >
+        <div class="flex justify-between gap-4 items-center">
+          <h2 class="font-bold">
+            {{ expense.title }}
+          </h2>
+          <p class="text-sm text-neutral-600">{{ formatCentsToEuro(expense.amount) }}</p>
+        </div>
+        <button
+          @click="toggleCategoryFilter(expense.category)"
+          class="inline-flex self-start px-1.5 py-0.5 bg-neutral-200 rounded text-xs"
+          :class="{
+            'bg-green-500': expense.category === filteredCategory,
+          }"
+        >
+          {{ expense.category }}
+        </button>
+        <p class="text-xs text-neutral-700">{{ formatDate(expense.date) }}</p>
+        <button
+          @click="removeExpense(expense.id)"
+          class="bg-neutral-200 text-neutral-600 hover:text-neutral-900 p-1 absolute rounded-br rounded-tl -bottom-px -right-px flex gap-2"
+          aria-label="Remove expense"
+        >
           <IconTrashXFilled size="20" />
-      </button>
+        </button>
+      </div>
     </div>
-    <p>
-      Total amount:
-      <span class="font-bold">
-        {{ formatCentsToEuro(totalAmount) }}
-      </span>
-    </p>
   </main>
 </template>
