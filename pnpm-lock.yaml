@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tabler/icons-vue':
+        specifier: ^3.22.0
+        version: 3.22.0(vue@3.5.12(typescript@5.6.3))
       vue:
         specifier: ^3.5.12
         version: 3.5.12(typescript@5.6.3)
@@ -572,6 +575,14 @@ packages:
     resolution: {integrity: sha512-2x8MO1rm4PGEP0xWbubJW5RtbNLk3puzAMaLQd3B3JHVw4KcHlmXcO+Wewx9zCoo7EUFiMlu/aZbCJ7VjMzAag==}
     cpu: [x64]
     os: [win32]
+
+  '@tabler/icons-vue@3.22.0':
+    resolution: {integrity: sha512-cgjvq+kjfqu7aJCAUmZByf+enUeLhSI7gVyWzBMCKNCehPoUHBmWNqM5zdnVJw/X2ogdvYL/H5arrSvKktH70Q==}
+    peerDependencies:
+      vue: '>=3.0.1'
+
+  '@tabler/icons@3.22.0':
+    resolution: {integrity: sha512-IfgGzhFph5OBr2wTieWL/hyAs0FThnq9O155a6kfGYxqx7h5LQw91wnRswhEaGhXCcfmR7ZVDUr9H+x4b9Pb8g==}
 
   '@tsconfig/node22@22.0.0':
     resolution: {integrity: sha512-twLQ77zevtxobBOD4ToAtVmuYrpeYUh3qh+TEp+08IWhpsrIflVHqQ1F1CiPxQGL7doCdBIOOCF+1Tm833faNg==}
@@ -2617,6 +2628,13 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.26.0':
     optional: true
+
+  '@tabler/icons-vue@3.22.0(vue@3.5.12(typescript@5.6.3))':
+    dependencies:
+      '@tabler/icons': 3.22.0
+      vue: 3.5.12(typescript@5.6.3)
+
+  '@tabler/icons@3.22.0': {}
 
   '@tsconfig/node22@22.0.0': {}
 

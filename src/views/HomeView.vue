@@ -5,6 +5,7 @@ import InputGroup from '@/components/InputGroup.vue'
 import Label from '@/components/Label.vue'
 import { formatCentsToEuro, formatDate } from '@/lib/utils'
 import { computed, ref } from 'vue'
+import { IconTrashXFilled } from '@tabler/icons-vue'
 
 const CATEGORIES = {
   FOOD: 'Food',
@@ -141,7 +142,7 @@ function addExpense() {
         class="bg-neutral-300 size-6 absolute rounded-full -top-3 -right-3"
         aria-label="Remove expense"
       >
-        x
+          <IconTrashXFilled size="20" />
       </button>
     </div>
     <p>
