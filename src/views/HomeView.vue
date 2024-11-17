@@ -87,8 +87,8 @@ const filteredExpenses = computed(() =>
   filteredCategory.value !== null
     ? expenses.value
         .filter((expense) => expense.category === filteredCategory.value)
-        .sort((a, b) => a.date.getTime() - b.date.getTime())
-    : expenses.value.sort((a, b) => a.date.getTime() - b.date.getTime()),
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
+    : expenses.value.sort((a, b) => b.date.getTime() - a.date.getTime()),
 )
 
 const totalAmount = computed(() =>
@@ -129,7 +129,7 @@ function addExpense() {
     category: '',
   }
   nextTick(() => {
-    expenseListRef.value?.scrollTo({ top: expenseListRef.value?.scrollHeight, behavior: 'smooth' })
+    expenseListRef.value?.scrollTo({ top: 0, behavior: 'smooth' })
   })
 }
 </script>
