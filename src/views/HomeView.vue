@@ -85,13 +85,16 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
     <section class="space-y-3 w-[inherit] md:w-1/2">
       <h1 class="font-bold text-2xl">
         Expensify -
-        <mark class="px-1 rounded py-0.5 bg-sky-200 text-sky-900"> Simplify expense tracking.</mark>
+        <mark class="px-1 rounded py-0.5 bg-sky-300 text-sky-950"> Simplify expense tracking.</mark>
       </h1>
       <p>
         Add a new expense to your list. <br />
         You can categorize your expenses to keep track of your spending.
       </p>
-      <form @submit.prevent="addExpense" class="p-4 bg-neutral-100 rounded-lg space-y-2">
+      <form
+        @submit.prevent="addExpense"
+        class="p-4 border bg-neutral-50 border-b-4 border-neutral-200 rounded-lg space-y-2"
+      >
         <InputGroup>
           <Label required for="title">Title</Label>
           <Input required id="title" type="text" v-model="form.title" placeholder="Cinema" />
@@ -106,7 +109,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
           <Label for="description">Description</Label>
           <textarea
             placeholder="Cinema ticket for the new Marvel movie."
-            class="border placeholder:text-neutral-400 border-neutral-200 bg-neutral-50 p-2 text-sm rounded-md"
+            class="border placeholder:text-neutral-400 border-b-2 border-neutral-200 bg-white p-2 text-sm rounded-md"
             v-model="form.description"
             name="description"
             id="description"
@@ -118,7 +121,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             required
             v-model="form.category"
             id="category"
-            class="border border-neutral-200 px-2 py-1 invalid:text-neutral-500 bg-neutral-50 text-sm block rounded-md"
+            class="border border-neutral-200 px-2 py-1 invalid:text-neutral-500 bg-white border-b-2 text-sm block rounded-md"
           >
             <option disabled value="" class="text-neutral-500">Select a category</option>
             <option v-for="(value, key) in CATEGORIES" :key :value>
@@ -167,19 +170,19 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             "
           >
             <hr class="h-px w-full bg-neutral-200" />
-            <p class="text-xs text-neutral-400">
+            <p class="text-xs text-neutral-500">
               {{ formatDate(expense.date) }}
             </p>
             <hr class="h-px w-full bg-neutral-200" />
           </div>
           <div
-            class="flex flex-col gap-1 relative border border-neutral-200 px-3 py-2 rounded-lg bg-white"
+            class="flex flex-col gap-1 relative border border-b-4 bg-neutral-50 border-neutral-200 px-3 py-2 rounded-lg"
           >
             <div class="flex justify-between gap-4 items-center">
               <h2 class="font-bold">
                 {{ expense.title }}
               </h2>
-              <p class="text-sm text-neutral-600">{{ formatCentsToEuro(expense.amount ?? 0) }}</p>
+              <p class="text-sm text-neutral-500">{{ formatCentsToEuro(expense.amount ?? 0) }}</p>
             </div>
             <p v-if="expense.description" class="text-sm mb-1 text-neutral-600">
               {{ expense.description }}
@@ -198,7 +201,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             </button>
             <button
               @click="removeExpense(expense.id)"
-              class="bg-neutral-200 text-neutral-600 hover:bg-red-400 transition-colors hover:text-neutral-900 p-1 absolute rounded-br-lg rounded-tl-lg -bottom-0.5 -right-0.5 flex gap-2"
+              class="border-l border-t bg-white shadow-inner border-neutral-200 text-neutral-600 hover:bg-neutral-100 transition-colors hover:text-neutral-800 p-1 absolute rounded-br-md rounded-tl-md right-0 bottom-0 flex gap-2"
               aria-label="Remove expense"
             >
               <IconTrashXFilled size="16" />
