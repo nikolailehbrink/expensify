@@ -121,7 +121,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             required
             v-model="form.category"
             id="category"
-            class="border border-neutral-200 px-2 py-1 invalid:text-neutral-500 bg-white border-b-2 text-sm block rounded-md"
+            class="border border-neutral-200 px-2 py-1 invalid:text-neutral-400 bg-white border-b-2 text-sm block rounded-md"
           >
             <option disabled value="" class="text-neutral-500">Select a category</option>
             <option v-for="(value, key) in CATEGORIES" :key :value>
