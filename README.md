@@ -1,7 +1,7 @@
-# Expense Tracker
+# Expensify
 
-A simple expense tracker built with Vue 3 and Vite. This project is my first
-Vue 3 project and should be considered as a learning project.
+A simple expense tracker built with `Vue 3` and `Vite`. <br>
+This project is my first Vue 3 project and should be considered as a learning project.
 
 <img width="1440" alt="Screenshot of the website" src="https://github.com/user-attachments/assets/785633eb-d124-4ec7-a66c-dd2f60fdb44e">
 
