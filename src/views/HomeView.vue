@@ -4,8 +4,8 @@ import InputGroup from '@/components/InputGroup.vue'
 import Input from '@/components/Input.vue'
 import Label from '@/components/Label.vue'
 import { formatCentsToEuro, formatDate } from '@/lib/utils'
-import { computed, ref, nextTick } from 'vue'
-import { IconTrashXFilled } from '@tabler/icons-vue'
+import { computed, nextTick, ref } from 'vue'
+import { IconFilterCheck, IconTrashXFilled } from '@tabler/icons-vue'
 
 const CATEGORIES = {
   FOOD: 'Food',
@@ -135,7 +135,7 @@ function addExpense() {
 </script>
 
 <template>
-  <main class="container mx-auto flex gap-8 items-center py-8 h-dvh">
+  <main class="container mx-auto flex gap-8 items-center py-4 h-dvh">
     <form @submit.prevent="addExpense" class="space-y-2 w-1/2">
       <h1 class="font-bold text-2xl">
         Expensify - <mark class="px-1 rounded py-0.5 bg-sky-300"> Simplify expense tracking.</mark>
@@ -157,8 +157,8 @@ function addExpense() {
       <InputGroup>
         <Label for="description">Description</Label>
         <textarea
-          class="border-2 border-neutral-200 bg-neutral-50 p-2 text-sm rounded-md"
           placeholder="Brot, Milch, Käse, Eier"
+          class="border-2 placeholder:text-neutral-400 border-neutral-200 bg-neutral-50 p-2 text-sm rounded-md"
           v-model="form.description"
           name="description"
           id="description"
@@ -212,11 +212,11 @@ function addExpense() {
                 datesAreOnSameDay(expense.date, filteredExpenses[index - 1].date) === false)
             "
           >
-            <hr class="h-0.5 w-full bg-neutral-200 -z-10" />
-            <p class="text-xs text-neutral-700 z-10">
+            <hr class="h-px w-full bg-neutral-200 -z-10" />
+            <p class="text-xs text-neutral-400 z-10">
               {{ formatDate(expense.date) }}
             </p>
-            <hr class="h-0.5 w-full -z-10 bg-neutral-200" />
+            <hr class="h-px w-full -z-10 bg-neutral-200" />
           </div>
           <div
             class="flex flex-col gap-1 relative border-2 border-neutral-200 px-3 py-2 rounded-lg bg-white"
@@ -235,10 +235,11 @@ function addExpense() {
               class="inline-flex self-start px-1.5 py-0.5 rounded text-xs"
               :class="
                 expense.category === filteredCategory
-                  ? 'bg-green-200 hover:bg-green-300'
-                  : 'bg-neutral-200 hover:bg-neutral-300'
+                  ? 'bg-sky-200 hover:bg-sky-300 text-sky-800 inline-flex gap-0.5 items-center'
+                  : 'bg-purple-100 hover:bg-purple-300 text-purple-800'
               "
             >
+              <IconFilterCheck size="14" v-if="expense.category === filteredCategory" />
               {{ expense.category }}
             </button>
             <button
