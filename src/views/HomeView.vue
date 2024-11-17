@@ -17,7 +17,16 @@ const CATEGORIES = {
   EDUCATION: 'Education',
   MISCELLANEOUS: 'Miscellaneous',
 }
-const expenses = ref([
+const expenses = ref<
+  {
+    id: number
+    title: string
+    description?: string
+    amount?: number
+    category: string
+    date: Date
+  }[]
+>([
   {
     id: 1,
     title: 'Restaurantbesuch',
@@ -108,6 +117,7 @@ function addExpense() {
   expenses.value.push({
     id: expenses.value[expenses.value.length - 1].id + 1,
     title: form.value.title,
+    description: form.value.description,
     amount: form.value.amount,
     category: form.value.category,
     date: new Date(),
@@ -148,6 +158,7 @@ function addExpense() {
         <Label for="description">Description</Label>
         <textarea
           class="border-2 border-neutral-200 bg-neutral-50 p-2 text-sm rounded-md"
+          placeholder="Brot, Milch, Käse, Eier"
           v-model="form.description"
           name="description"
           id="description"
