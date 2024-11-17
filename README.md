@@ -1,18 +1,25 @@
-# vue-project
+# Expense Tracker
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple expense tracker built with Vue 3 and Vite. This project is my first
+Vue 3 project and should be considered as a learning project.
 
-## Recommended IDE Setup
+<img width="1440" alt="Screenshot of the website" src="https://github.com/user-attachments/assets/785633eb-d124-4ec7-a66c-dd2f60fdb44e">
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Stack
 
-## Type Support for `.vue` Imports in TS
+- [Vue 3](https://v3.vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tabler Icons](https://tabler.io/icons)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Features
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+1. **Add Expenses:** Users can input expense details, including title, description, amount, category, and date.
+2. **View Expense List:** Display all added expenses in a list.
+3. **Delete Expenses:** Remove any expense from the list.
+4. **Filter by Category:** View expenses for a specific category using a filter.
+5. **Calculate Totals:** Show the total amount spent and display totals broken down by category.
+6. **Track Dates:** Organize and display expenses by date.
 
 ## Project Setup
 
