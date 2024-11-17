@@ -1,0 +1,68 @@
+import { CATEGORIES } from './categories'
+
+export const expenses = [
+  {
+    id: 1,
+    title: 'Dinner at Italian Restaurant',
+    description: 'Dinner with friends at Bella Italia.',
+    amount: 8327,
+    category: CATEGORIES.FOOD,
+    date: new Date('2024-01-15'),
+  },
+  {
+    id: 2,
+    title: 'Security Deposit',
+    description: 'Security deposit for the new apartment.',
+    amount: 210000,
+    category: CATEGORIES.RENT,
+    date: new Date('2024-02-10'),
+  },
+  {
+    id: 3,
+    title: 'Car Insurance',
+    description: 'Annual car insurance payment.',
+    amount: 6532,
+    category: CATEGORIES.INSURANCE,
+    date: new Date('2024-03-05'),
+  },
+  {
+    id: 4,
+    title: 'Gasoline',
+    description: 'Fuel for the car.',
+    amount: 1000,
+    category: CATEGORIES.TRANSPORT,
+    date: new Date('2024-04-20'),
+  },
+  {
+    id: 5,
+    title: 'Netflix Subscription',
+    description: 'Monthly Netflix subscription fee.',
+    amount: 999,
+    category: CATEGORIES.ENTERTAINMENT,
+    date: new Date('2024-05-25'),
+  },
+  {
+    id: 6,
+    title: 'Medication',
+    description: 'Purchase of prescribed medication.',
+    amount: 5999,
+    category: CATEGORIES.HEALTH,
+    date: new Date('2024-06-15'),
+  },
+  {
+    id: 7,
+    title: 'TypeScript Book',
+    description: 'Bought a book to learn TypeScript.',
+    amount: 4399,
+    category: CATEGORIES.EDUCATION,
+    date: new Date('2024-07-10'),
+  },
+  {
+    id: 8,
+    title: 'Music Subscription',
+    description: 'Monthly subscription to Splice.',
+    amount: 872,
+    category: CATEGORIES.MISCELLANEOUS,
+    date: new Date('2024-07-10'),
+  },
+]
