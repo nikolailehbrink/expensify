@@ -5,7 +5,7 @@ import Input from '@/components/Input.vue'
 import Label from '@/components/Label.vue'
 import { formatCentsToEuro, formatDate, isSameDay } from '@/lib/utils'
 import { computed, nextTick, ref } from 'vue'
-import { IconFilterCheck, IconTrashXFilled } from '@tabler/icons-vue'
+import { IconFilterCheck, IconTextPlus, IconTrashXFilled } from '@tabler/icons-vue'
 import { expenses } from '@/data/expenses'
 import { CATEGORIES } from '@/data/categories'
 
@@ -126,7 +126,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             </option>
           </select>
         </InputGroup>
-        <Button>Add expense</Button>
+        <Button><IconTextPlus size="20" />Add expense</Button>
       </form>
     </section>
 
