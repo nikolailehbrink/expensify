@@ -59,10 +59,15 @@ const expenses = ref([
   },
 ])
 
-const form = ref({
+const form = ref<{
+  title: string
+  description: string
+  amount?: number
+  category: keyof typeof CATEGORIES | ''
+}>({
   title: '',
   description: '',
-  amount: 0,
+  amount: undefined,
   category: '',
 })
 
@@ -78,7 +83,7 @@ const filteredExpenses = computed(() =>
 )
 
 const totalAmount = computed(() =>
-  filteredExpenses.value.reduce((expense, total) => expense + total.amount, 0),
+  filteredExpenses.value.reduce((expense, total) => expense + (total.amount ?? 0), 0),
 )
 
 const totalExpenses = computed(() => filteredExpenses.value.length)
@@ -110,7 +115,7 @@ function addExpense() {
   form.value = {
     title: '',
     description: '',
-    amount: 0,
+    amount: undefined,
     category: '',
   }
   nextTick(() => {
@@ -137,7 +142,7 @@ function addExpense() {
         <Label for="amount" required
           >Amount <span class="text-xs text-neutral-600 font-normal">(in cents)</span></Label
         >
-        <Input required type="number" id="amount" v-model="form.amount" />
+        <Input required placeholder="5690" type="number" id="amount" v-model="form.amount" />
       </InputGroup>
       <InputGroup>
         <Label for="description">Description</Label>
@@ -209,7 +214,7 @@ function addExpense() {
               <h2 class="font-bold">
                 {{ expense.title }}
               </h2>
-              <p class="text-sm text-neutral-600">{{ formatCentsToEuro(expense.amount) }}</p>
+              <p class="text-sm text-neutral-600">{{ formatCentsToEuro(expense.amount ?? 0) }}</p>
             </div>
             <p v-if="expense.description" class="text-sm mb-1">
               {{ expense.description }}
