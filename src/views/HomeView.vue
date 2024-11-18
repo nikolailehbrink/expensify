@@ -86,15 +86,17 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
     <section class="space-y-3 w-[inherit] md:w-1/2">
       <h1 class="font-bold text-2xl">
         Expensify -
-        <mark class="px-1 rounded py-0.5 bg-sky-300 text-sky-950"> Simplify expense tracking.</mark>
+        <mark class="px-1 rounded py-0.5 bg-sky-300 text-sky-950 dark:bg-sky-900 dark:text-sky-200">
+          Simplify expense tracking.</mark
+        >
       </h1>
-      <p>
+      <p class="dark:text-neutral-300">
         Add a new expense to your list. <br />
         You can categorize your expenses to keep track of your spending.
       </p>
       <form
         @submit.prevent="addExpense"
-        class="p-4 border bg-neutral-50 border-b-4 border-neutral-200 rounded-lg space-y-2"
+        class="p-4 border bg-neutral-50 dark:bg-neutral-800 dark:shadow-neutral-700 shadow-bottom-4 border-neutral-200 dark:border-neutral-700 rounded-lg space-y-3"
       >
         <InputGroup>
           <Label required for="title">Title</Label>
@@ -125,7 +127,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             :class="inputClasses"
             class="invalid:text-neutral-400 dark:invalid:text-neutral-600"
           >
-            <option disabled value="" class="text-neutral-500">Select a category</option>
+            <option disabled value="">Select a category</option>
             <option v-for="(value, key) in CATEGORIES" :key :value>
               {{ value }}
             </option>
@@ -159,10 +161,10 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
       </header>
       <div class="relative">
         <div
-          class="bg-gradient-to-b from-white via-80% via-transparent shrink-0 z-10 to-transparent w-full top-0 h-4 absolute flex"
+          class="bg-gradient-to-b md:inset-0 md:right-4 max-md:hidden from-white dark:from-neutral-900 via-80% via-transparent shrink-0 z-10 to-transparent top-0 h-4 absolute flex"
         ></div>
       </div>
-      <ol ref="expenseList" class="h-full md:overflow-y-scroll flex flex-col gap-2 md:pr-4">
+      <ol ref="expenseList" class="h-full md:overflow-y-scroll flex flex-col gap-3 md:pr-4 pb-1">
         <li :key="expense.id" v-for="(expense, index) in filteredExpenses" class="space-y-2">
           <div
             class="mt-2 flex gap-2 justify-between items-center"
@@ -171,22 +173,27 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
               (index > 0 && isSameDay(expense.date, filteredExpenses[index - 1].date) === false)
             "
           >
-            <p class="text-xs text-neutral-500">
             <Hr />
+            <p class="text-xs text-neutral-600 dark:text-neutral-400">
               {{ formatDate(expense.date) }}
             </p>
             <Hr />
           </div>
           <div
-            class="flex flex-col gap-1 relative border border-b-4 bg-neutral-50 border-neutral-200 px-3 py-2 rounded-lg"
+            class="flex flex-col gap-1 relative border shadow-bottom-4 dark:shadow-neutral-700 bg-neutral-50 dark:bg-neutral-800 dark:border-neutral-700 border-neutral-200 shadow-neutral-200 px-3 py-2 rounded-lg"
           >
             <div class="flex justify-between gap-4 items-center">
               <h2 class="font-bold">
                 {{ expense.title }}
               </h2>
-              <p class="text-sm text-neutral-500">{{ formatCentsToEuro(expense.amount ?? 0) }}</p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                {{ formatCentsToEuro(expense.amount ?? 0) }}
+              </p>
             </div>
-            <p v-if="expense.description" class="text-sm mb-1 text-neutral-600">
+            <p
+              v-if="expense.description"
+              class="text-sm mb-1 text-neutral-600 dark:text-neutral-400"
+            >
               {{ expense.description }}
             </p>
             <button
@@ -194,8 +201,8 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
               class="inline-flex self-start px-1.5 py-0.5 rounded text-xs"
               :class="
                 expense.category === filteredCategory
-                  ? 'bg-sky-200 hover:bg-sky-300 text-sky-800 inline-flex gap-0.5 items-center'
-                  : 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800'
+                  ? 'bg-sky-200 dark:bg-sky-800 dark:text-sky-200 hover:bg-sky-300 text-sky-800 inline-flex gap-0.5 items-center'
+                  : 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300 hover:dark:bg-neutral-600'
               "
             >
               <IconFilterCheck size="14" v-if="expense.category === filteredCategory" />
@@ -203,7 +210,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             </button>
             <button
               @click="removeExpense(expense.id)"
-              class="border-l border-t bg-white shadow-inner border-neutral-200 text-neutral-600 hover:bg-neutral-100 transition-colors hover:text-neutral-800 p-1 absolute rounded-br-md rounded-tl-md right-0 bottom-0 flex gap-2"
+              class="border-l border-t bg-white dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-600 border-neutral-200 text-neutral-600 transition-colors p-1 absolute rounded-br-md rounded-tl-md right-0 bottom-0 flex gap-2 hover:!text-red-500"
               aria-label="Remove expense"
             >
               <IconTrashXFilled size="16" />
