@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
 import InputGroup from '@/components/InputGroup.vue'
-import Input from '@/components/Input.vue'
+import Input, { inputClasses } from '@/components/Input.vue'
 import Label from '@/components/Label.vue'
 import { formatCentsToEuro, formatDate, isSameDay } from '@/lib/utils'
 import { computed, nextTick, ref } from 'vue'
@@ -110,7 +110,7 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
           <Label for="description">Description</Label>
           <textarea
             placeholder="Cinema ticket for the new Marvel movie."
-            class="border placeholder:text-neutral-400 border-b-2 border-neutral-200 bg-white p-2 text-sm rounded-md"
+            :class="inputClasses"
             v-model="form.description"
             name="description"
             id="description"
@@ -122,7 +122,8 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
             required
             v-model="form.category"
             id="category"
-            class="border border-neutral-200 px-2 py-1 invalid:text-neutral-400 bg-white border-b-2 text-sm block rounded-md"
+            :class="inputClasses"
+            class="invalid:text-neutral-400 dark:invalid:text-neutral-600"
           >
             <option disabled value="" class="text-neutral-500">Select a category</option>
             <option v-for="(value, key) in CATEGORIES" :key :value>
