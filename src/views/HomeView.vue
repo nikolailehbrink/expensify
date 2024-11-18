@@ -8,6 +8,7 @@ import { computed, nextTick, ref } from 'vue'
 import { IconFilterCheck, IconTextPlus, IconTrashXFilled } from '@tabler/icons-vue'
 import { expenses } from '@/data/expenses'
 import { CATEGORIES } from '@/data/categories'
+import Hr from '@/components/Hr.vue'
 
 const initialExpenses = ref<
   {
@@ -169,11 +170,11 @@ const totalExpenses = computed(() => filteredExpenses.value.length)
               (index > 0 && isSameDay(expense.date, filteredExpenses[index - 1].date) === false)
             "
           >
-            <hr class="h-px w-full bg-neutral-200" />
             <p class="text-xs text-neutral-500">
+            <Hr />
               {{ formatDate(expense.date) }}
             </p>
-            <hr class="h-px w-full bg-neutral-200" />
+            <Hr />
           </div>
           <div
             class="flex flex-col gap-1 relative border border-b-4 bg-neutral-50 border-neutral-200 px-3 py-2 rounded-lg"
